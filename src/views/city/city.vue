@@ -1,7 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { getCityAll } from "@/services";
+import useCityStore from "@/stores/modules/city";
+import { storeToRefs } from "pinia";
+import CityContentItem from "./cpns/city-content-item.vue";
 // 搜索框
 const router = useRouter();
 const searchValue = ref("");
@@ -11,9 +13,9 @@ const cancelClick = () => {
 
 // tab 切换
 const tabActive = ref();
-getCityAll().then((res) => {
-  console.log(res);
-});
+const cityStore = useCityStore();
+cityStore.fetchAllCitiesAction();
+const { allCities } = storeToRefs(cityStore);
 </script>
 
 <template>
@@ -25,10 +27,12 @@ getCityAll().then((res) => {
       @cancel="cancelClick"
       placeholder="城市/区域/位置"
     />
-
     <van-tabs v-model:active="tabActive">
-      <van-tab title="国内·港澳台">内容 1</van-tab>
-      <van-tab title="海外">内容 2</van-tab>
+      <template v-for="(value, key, index) in allCities">
+        <van-tab :title="value.title">
+          <city-content-item :group-cites-props="value" />
+        </van-tab>
+      </template>
     </van-tabs>
   </div>
 </template>
@@ -37,5 +41,9 @@ getCityAll().then((res) => {
 .city {
   --van-search-left-icon-color: var(--primary-color);
   --van-tabs-bottom-bar-color: var(--primary-color);
+  :deep(.van-tabs__content) {
+    height: calc(100vh - 98px);
+    overflow-y: auto;
+  }
 }
 </style>
