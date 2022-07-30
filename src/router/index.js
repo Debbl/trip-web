@@ -6,6 +6,11 @@ const routes = [
   { path: "/favor", component: () => import("@/views/favor/favor.vue") },
   { path: "/message", component: () => import("@/views/message/message.vue") },
   { path: "/order", component: () => import("@/views/order/order.vue") },
+  {
+    path: "/city",
+    component: () => import("@/views/city/city.vue"),
+    meta: { hideTabBar: true },
+  },
 ];
 
 const router = createRouter({
