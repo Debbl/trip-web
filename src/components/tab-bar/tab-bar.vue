@@ -21,14 +21,6 @@ const tabBarClick = (item, index) => {
         :class="{ active: currentIndex === index }"
         @click="tabBarClick(item, index)"
       >
-        <!-- <img
-          :src="
-            getAssetsURL(
-              currentIndex === index ? item.imgActiveSrc : item.imgSrc
-            )
-          "
-          alt=""
-        /> -->
         <img
           v-if="currentIndex !== index"
           :src="getAssetsURL(item.imgSrc)"
