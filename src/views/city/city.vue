@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-
+import { getCityAll } from "@/services";
 // 搜索框
 const router = useRouter();
 const searchValue = ref("");
@@ -11,6 +11,9 @@ const cancelClick = () => {
 
 // tab 切换
 const tabActive = ref();
+getCityAll().then((res) => {
+  console.log(res);
+});
 </script>
 
 <template>
