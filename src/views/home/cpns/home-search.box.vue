@@ -1,5 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
+import useCityStore from "@/stores/modules/city";
 
 const router = useRouter();
 
@@ -17,12 +18,17 @@ const getPositionClick = () => {
     }
   );
 };
+
+// 选中当前城市
+const cityStore = useCityStore();
 </script>
 
 <template>
   <div class="search-box">
     <div class="location">
-      <div class="city" @click="cityClick">广州</div>
+      <div class="city" @click="cityClick">
+        {{ cityStore.currentCity.cityName || "默认城市" }}
+      </div>
       <div class="position" @click="getPositionClick">
         <span class="text">我的位置</span>
         <img src="@/assets/img/home/icon_location.png" alt="" />

@@ -14,7 +14,7 @@ const cancelClick = () => {
 // tab 切换
 const tabActive = ref();
 const cityStore = useCityStore();
-cityStore.fetchAllCitiesAction();
+Object.keys(cityStore.allCities).length || cityStore.fetchAllCitiesAction();
 const { allCities } = storeToRefs(cityStore);
 </script>
 
