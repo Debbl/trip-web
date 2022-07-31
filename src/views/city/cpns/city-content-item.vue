@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from "@vue/reactivity";
+import { computed } from "vue";
 
 const props = defineProps({
   groupCitesProps: {
@@ -8,14 +8,22 @@ const props = defineProps({
   },
 });
 
-const indexGroup = computed(() =>
-  props.groupCitesProps.cities.map((item) => item.group)
-);
+const indexGroup = computed(() => {
+  const groupArr = props.groupCitesProps.cities.map((item) => item.group);
+  groupArr.unshift("#");
+  return groupArr;
+});
 </script>
 
 <template>
   <div class="city-content-item">
-    <van-index-bar :index-list="indexGroup">
+    <van-index-bar :index-list="indexGroup" :sticky="false">
+      <van-index-anchor index="#">热门</van-index-anchor>
+      <div class="list">
+        <template v-for="hotCity in groupCitesProps.hotCities">
+          <div class="hot-city">{{ hotCity.cityName }}</div>
+        </template>
+      </div>
       <template
         v-for="groupCites in groupCitesProps.cities"
         :key="groupCites.group"
@@ -29,4 +37,20 @@ const indexGroup = computed(() =>
   </div>
 </template>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.city-content-item {
+  .list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 10px;
+    .hot-city {
+      width: 70px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      padding: 6px;
+    }
+  }
+}
+</style>
