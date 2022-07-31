@@ -1,7 +1,7 @@
 import dayjs from "dayjs";
 
 function formatMonthDay(date) {
-  console.log(date);
+  // console.log(date);
   return dayjs(date).format("MM月DD日");
 }
 

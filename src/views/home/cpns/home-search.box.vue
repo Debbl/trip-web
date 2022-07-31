@@ -1,12 +1,14 @@
 <script setup>
 import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
+import { storeToRefs } from "pinia";
 import useCityStore from "@/stores/modules/city";
 import {
   formatMonthDay,
   formatMonthDayAddOneDay,
   getStayDays,
 } from "@/utils/format-month-day";
+import useHomeStore from "@/stores/modules/home";
 
 const router = useRouter();
 
@@ -44,12 +46,17 @@ const onConfirm = (value) => {
   showCalendar.value = false;
 };
 const stayDays = computed(() => getStayDays(startDate.value, endDate.value));
+
+// 热门地区建议
+const homeStore = useHomeStore();
+homeStore.fetchHotSuggestAction();
+const { hotSuggests } = storeToRefs(homeStore);
 </script>
 
 <template>
   <div class="search-box">
     <!-- 位置信息 -->
-    <div class="location">
+    <div class="location border-bottom-line">
       <div class="city" @click="cityClick">
         {{ cityStore.currentCity.cityName || "默认城市" }}
       </div>
@@ -60,7 +67,7 @@ const stayDays = computed(() => getStayDays(startDate.value, endDate.value));
     </div>
 
     <!-- 日期范围 -->
-    <div class="date-range" @click="dateRangeClick">
+    <div class="date-range border-bottom-line" @click="dateRangeClick">
       <div class="item start">
         <span class="tip">入住</span>
         <span class="time">{{ formatMonthDay(startDate) }}</span>
@@ -79,6 +86,32 @@ const stayDays = computed(() => getStayDays(startDate.value, endDate.value));
       :round="false"
       @confirm="onConfirm"
     />
+
+    <!-- 关键信息 -->
+    <div class="keyword-info">
+      <div class="keyword-info-top border-bottom-line">
+        <span class="price">价格不限</span>
+        <span class="people">人数不限</span>
+      </div>
+      <div class="keyword-info-bottom border-bottom-line">
+        关键字/位置/民宿名
+      </div>
+    </div>
+
+    <!-- 热门地区建议 -->
+    <div class="hot-suggests">
+      <template v-for="item in hotSuggests" :key="item.tagText.text">
+        <div
+          :style="{
+            color: item.color,
+            backgroundColor: item.tagText.background.color,
+          }"
+          class="item"
+        >
+          {{ item.tagText.text }}
+        </div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -127,6 +160,44 @@ const stayDays = computed(() => getStayDays(startDate.value, endDate.value));
       .tip {
         color: #666;
       }
+    }
+  }
+  .keyword-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
+    .keyword-info-top {
+      box-sizing: border-box;
+      color: #666;
+      display: flex;
+      width: 100%;
+      text-align: left;
+      span {
+        flex: 1;
+        padding: 13px 20px;
+      }
+      .people {
+        border-left: 1px solid #eee;
+      }
+    }
+    .keyword-info-bottom {
+      box-sizing: border-box;
+      width: 100%;
+      color: #666;
+      padding: 13px 20px;
+    }
+  }
+  .hot-suggests {
+    padding: 13px 20px;
+    display: flex;
+    flex-wrap: wrap;
+    .item {
+      margin: 4px;
+      color: #444;
+      font-size: 12px;
+      padding: 4px 8px;
+      border-radius: 14px;
     }
   }
 }
