@@ -1,6 +1,7 @@
 <script setup>
 import HomeNavBar from "./cpns/home-nav-bar.vue";
 import HomeSearchBox from "./cpns/home-search.box.vue";
+import HomeCategories from "./cpns/home-categories.vue";
 </script>
 
 <template>
@@ -10,6 +11,7 @@ import HomeSearchBox from "./cpns/home-search.box.vue";
       <img src="@/assets/img/home/banner.webp" alt="" />
     </div>
     <home-search-box />
+    <home-categories />
   </div>
 </template>
 

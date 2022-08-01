@@ -5,4 +5,10 @@ function getHotSuggests() {
   });
 }
 
-export { getHotSuggests };
+function getCategories() {
+  return axiosRequest.get({
+    url: "/home/categories",
+  });
+}
+
+export { getHotSuggests, getCategories };

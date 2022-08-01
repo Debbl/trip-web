@@ -132,7 +132,7 @@ const searchClick = (cityName) => {
 
     <!-- 搜索按钮 -->
     <div class="search-btn">
-      <div class="btn" @click="searchClick">开始搜索</div>
+      <div class="btn" @click="searchClick(null)">开始搜索</div>
     </div>
   </div>
 </template>
