@@ -30,6 +30,7 @@ const getPositionClick = () => {
 
 // 选中当前城市
 const cityStore = useCityStore();
+const { currentCity } = storeToRefs(cityStore);
 
 // 日期处理
 const nowTime = new Date();
@@ -51,6 +52,21 @@ const stayDays = computed(() => getStayDays(startDate.value, endDate.value));
 const homeStore = useHomeStore();
 homeStore.fetchHotSuggestAction();
 const { hotSuggests } = storeToRefs(homeStore);
+const hotCityClick = (cityName) => {
+  searchClick(cityName);
+};
+
+// 搜索按钮
+const searchClick = (cityName) => {
+  router.push({
+    path: "/search",
+    query: {
+      startDate: startDate.value,
+      endDate: endDate.value,
+      currentCity: cityName || currentCity.value.cityName,
+    },
+  });
+};
 </script>
 
 <template>
@@ -58,7 +74,7 @@ const { hotSuggests } = storeToRefs(homeStore);
     <!-- 位置信息 -->
     <div class="location border-bottom-line">
       <div class="city" @click="cityClick">
-        {{ cityStore.currentCity.cityName || "默认城市" }}
+        {{ currentCity.cityName || "默认城市" }}
       </div>
       <div class="position" @click="getPositionClick">
         <span class="text">我的位置</span>
@@ -107,10 +123,16 @@ const { hotSuggests } = storeToRefs(homeStore);
             backgroundColor: item.tagText.background.color,
           }"
           class="item"
+          @click="hotCityClick(item.tagText.text)"
         >
           {{ item.tagText.text }}
         </div>
       </template>
+    </div>
+
+    <!-- 搜索按钮 -->
+    <div class="search-btn">
+      <div class="btn" @click="searchClick">开始搜索</div>
     </div>
   </div>
 </template>
@@ -198,6 +220,19 @@ const { hotSuggests } = storeToRefs(homeStore);
       font-size: 12px;
       padding: 4px 8px;
       border-radius: 14px;
+    }
+  }
+  .search-btn {
+    padding: 10px 20px;
+    .btn {
+      padding: 8px;
+      text-align: center;
+      width: 100%;
+      font-size: 18px;
+      font-weight: 500;
+      background-image: var(--theme-linear-gradient);
+      border-radius: 15px;
+      color: #fff;
     }
   }
 }
