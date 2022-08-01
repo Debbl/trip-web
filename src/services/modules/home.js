@@ -10,5 +10,13 @@ function getCategories() {
     url: "/home/categories",
   });
 }
+function getHouselist(page) {
+  return axiosRequest.get({
+    url: "/home/houselist",
+    params: {
+      page,
+    },
+  });
+}
 
-export { getHotSuggests, getCategories };
+export { getHotSuggests, getCategories, getHouselist };
