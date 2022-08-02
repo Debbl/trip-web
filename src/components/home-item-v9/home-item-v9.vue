@@ -20,7 +20,7 @@ const { image, summaryText, houseName, finalPrice, commentScore } =
         <div class="house-name">{{ houseName }}</div>
         <div class="price">
           <van-rate
-            :model-value="commentScore"
+            :model-value="+commentScore"
             :size="15"
             color="#fff"
             readonly

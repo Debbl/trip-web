@@ -8,7 +8,7 @@ const currentIndex = ref(0);
 
 <template>
   <div class="tab-bar">
-    <van-tabbar v-model="currentIndex" active-color="#ff9854">
+    <van-tabbar v-model="currentIndex" active-color="#ff9854" route>
       <template v-for="item in tabBarData" :key="item.text">
         <van-tabbar-item :to="item.path">
           <span>{{ item.text }}</span>
