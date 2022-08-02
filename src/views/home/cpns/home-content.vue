@@ -1,15 +1,24 @@
 <script setup>
+import { watch } from "vue";
 import { storeToRefs } from "pinia";
 import useHomeStore from "@/stores/modules/home.js";
 import HomeItemV9 from "@/components/home-item-v9/home-item-v9.vue";
 import HomeItemV3 from "@/components/home-item-v3/home-item-v3.vue";
+import useScroll from "@/hooks/useScroll.js";
 
 const homeStore = useHomeStore();
 const { houselist } = storeToRefs(homeStore);
 homeStore.fetchHouselistAction();
-const loadingMoreClick = () => {
-  homeStore.fetchHouselistAction();
-};
+console.log("-----------------------");
+// 加载更多
+const { isReachBottom } = useScroll();
+watch(isReachBottom, (newValue) => {
+  if (newValue) {
+    homeStore.fetchHouselistAction().then(() => {
+      isReachBottom.value = false;
+    });
+  }
+});
 </script>
 
 <template>
@@ -27,7 +36,6 @@ const loadingMoreClick = () => {
         />
       </template>
     </div>
-    <button @click="loadingMoreClick">加载更多</button>
   </div>
 </template>
 
