@@ -1,18 +1,19 @@
 <script setup>
+import useCityStore from "@/stores/modules/city.js";
+import useMainStore from "@/stores/modules/main.js";
 import { formatMonthDay } from "@/utils/format-month-day.js";
-import { computed } from "vue";
-import { useRoute } from "vue-router";
+import { storeToRefs } from "pinia";
 
-const route = useRoute();
-const startDate = computed(() => formatMonthDay(route.query.startDate));
-const endDate = computed(() => formatMonthDay(route.query.endDate));
-const currentCity = computed(() => route.query.currentCity);
+const mainStore = useMainStore();
+const cityStore = useCityStore();
+const { currentCity } = storeToRefs(cityStore);
+const { startDate, endDate } = storeToRefs(mainStore);
 </script>
 
 <template>
   <div class="search">
-    <h2>开始时间 {{ startDate }}</h2>
-    <h2>结束时间 {{ endDate }}</h2>
-    <h2>当前城市 {{ currentCity }}</h2>
+    <h2>开始时间 {{ formatMonthDay(startDate) }}</h2>
+    <h2>结束时间 {{ formatMonthDay(endDate) }}</h2>
+    <h2>当前城市 {{ currentCity.cityName }}</h2>
   </div>
 </template>

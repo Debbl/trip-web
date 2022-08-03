@@ -9,6 +9,7 @@ import {
   getStayDays,
 } from "@/utils/format-month-day";
 import useHomeStore from "@/stores/modules/home";
+import useMainStore from "@/stores/modules/main.js";
 
 const router = useRouter();
 
@@ -33,10 +34,8 @@ const cityStore = useCityStore();
 const { currentCity } = storeToRefs(cityStore);
 
 // 日期处理
-const nowTime = new Date();
-const nowTimeAddOne = new Date().setDate(nowTime.getDate() + 1);
-const startDate = ref(nowTime);
-const endDate = ref(nowTimeAddOne);
+const mainStore = useMainStore();
+const { startDate, endDate } = storeToRefs(mainStore);
 const showCalendar = ref(false);
 const dateRangeClick = () => {
   showCalendar.value = true;
@@ -52,20 +51,10 @@ const stayDays = computed(() => getStayDays(startDate.value, endDate.value));
 const homeStore = useHomeStore();
 homeStore.fetchHotSuggestAction();
 const { hotSuggests } = storeToRefs(homeStore);
-const hotCityClick = (cityName) => {
-  searchClick(cityName);
-};
 
 // 搜索按钮
 const searchClick = (cityName) => {
-  router.push({
-    path: "/search",
-    query: {
-      startDate: startDate.value,
-      endDate: endDate.value,
-      currentCity: cityName || currentCity.value.cityName,
-    },
-  });
+  router.push("/search");
 };
 </script>
 
@@ -123,7 +112,6 @@ const searchClick = (cityName) => {
             backgroundColor: item.tagText.background.color,
           }"
           class="item"
-          @click="hotCityClick(item.tagText.text)"
         >
           {{ item.tagText.text }}
         </div>

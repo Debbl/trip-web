@@ -22,10 +22,12 @@ const useHomeStore = defineStore("home", {
     fetchHouselistAction() {
       return new Promise((resolve) => {
         getHouselist(this.currentPage).then((res) => {
-          this.houselist.push(...res.data);
-          this.currentPage++;
+          if (res.data) {
+            this.houselist.push(...res.data);
+            this.currentPage++;
+          }
           resolve();
-        })
+        });
       });
     },
   },

@@ -9,7 +9,7 @@ import useScroll from "@/hooks/useScroll.js";
 const homeStore = useHomeStore();
 const { houselist } = storeToRefs(homeStore);
 homeStore.fetchHouselistAction();
-console.log("-----------------------");
+
 // 加载更多
 const { isReachBottom } = useScroll();
 watch(isReachBottom, (newValue) => {
