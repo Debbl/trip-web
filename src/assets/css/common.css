@@ -1,6 +1,7 @@
 :root {
   --primary-color: #ff9854;
   --van-danger-color: var(--primary-color);
+  --van-primary-color: var(--primary-color);
   --theme-linear-gradient: linear-gradient(90deg, #fa8c1d, #fcaf3f);
 }
 

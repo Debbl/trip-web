@@ -1,6 +1,7 @@
 <script setup>
 import { watch } from "vue";
 import { storeToRefs } from "pinia";
+import { useRouter } from "vue-router";
 import useHomeStore from "@/stores/modules/home.js";
 import HomeItemV9 from "@/components/home-item-v9/home-item-v9.vue";
 import HomeItemV3 from "@/components/home-item-v3/home-item-v3.vue";
@@ -19,6 +20,13 @@ watch(isReachBottom, (newValue) => {
     });
   }
 });
+
+// 详情跳转
+const router = useRouter();
+const itemClick = (data) => {
+  console.log(data.houseId);
+  router.push("/detail/" + data.houseId);
+};
 </script>
 
 <template>
@@ -29,10 +37,12 @@ watch(isReachBottom, (newValue) => {
         <home-item-v9
           v-if="item.discoveryContentType === 9"
           :item-data="item.data"
+          @click="itemClick(item.data)"
         />
         <home-item-v3
           v-else-if="item.discoveryContentType === 3"
           :item-data="item.data"
+          @click="itemClick(item.data)"
         />
       </template>
     </div>
