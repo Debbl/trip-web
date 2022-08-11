@@ -22,6 +22,10 @@ export default defineConfig(({ command }) => {
         localEnabled: command === "serve",
       }),
     ],
+    server: {
+      open: true,
+      host: "localhost",
+    },
     resolve: {
       alias: {
         "@": fileURLToPath(new URL("./src", import.meta.url)),
