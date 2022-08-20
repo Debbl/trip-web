@@ -3,7 +3,7 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getDetailInfos } from "@/services";
 import DetailSwipe from "./cpns/detail-01-swipe.vue";
-import DetailInfos from './cpns/detail-02-infos.vue'
+import DetailInfos from "./cpns/detail-02-infos.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -11,12 +11,12 @@ const onClickLeft = () => {
   router.back();
 };
 
-const detailInfos = ref({});
+const infos = ref({});
 getDetailInfos(route.params.id).then((res) => {
-  detailInfos.value = res.data;
+  infos.value = res.data;
 });
 
-const mainPart = computed(() => detailInfos.value.mainPart);
+const mainPart = computed(() => infos.value.mainPart);
 
 // const navNames = ["描述", "设施", "房东", "评论", "须知", "周边"];
 </script>

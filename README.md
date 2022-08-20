@@ -11,3 +11,5 @@
 - router
 
 ## pinia
+
+## eslint prettier

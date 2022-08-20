@@ -3,11 +3,7 @@ import { ref, computed } from "vue";
 import { useRouter } from "vue-router";
 import { storeToRefs } from "pinia";
 import useCityStore from "@/stores/modules/city";
-import {
-  formatMonthDay,
-  formatMonthDayAddOneDay,
-  getStayDays,
-} from "@/utils/format-month-day";
+import { formatMonthDay, getStayDays } from "@/utils/format-month-day";
 import useHomeStore from "@/stores/modules/home";
 import useMainStore from "@/stores/modules/main.js";
 

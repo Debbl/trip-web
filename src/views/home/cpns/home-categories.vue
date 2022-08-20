@@ -8,7 +8,7 @@ const { categories } = storeToRefs(homeStore);
 
 <template>
   <div class="home-categories">
-    <template v-for="item in categories">
+    <template v-for="item in categories" :key="item.id">
       <div class="item">
         <img :src="item.pictureUrl" alt="" />
         <span class="text">{{ item.title }}</span>

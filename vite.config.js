@@ -8,6 +8,8 @@ import { VantResolver } from "unplugin-vue-components/resolvers";
 
 import { viteMockServe } from "vite-plugin-mock";
 
+import eslint from "vite-plugin-eslint";
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
   return {
@@ -21,6 +23,7 @@ export default defineConfig(({ command }) => {
         mockPath: "mock",
         localEnabled: command === "serve",
       }),
+      eslint(),
     ],
     server: {
       open: true,

@@ -5,7 +5,7 @@ const props = defineProps({
   housePicture: {
     type: Object,
     default: () => ({}),
-  }
+  },
 });
 
 const housesGroup = {};
@@ -43,9 +43,9 @@ const getFormatTitle = (title) => {
           <img :src="item.url" alt="" />
         </van-swipe-item>
       </template>
-      <template #indicator="{ active, total }">
+      <template #indicator="{ active }">
         <div class="custom-indicator">
-          <template v-for="(value, key, index) in housesGroup" :key="key">
+          <template v-for="(value, key) in housesGroup" :key="key">
             <div
               class="item"
               :class="{

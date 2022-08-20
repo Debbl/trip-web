@@ -3,6 +3,7 @@ const props = defineProps({
   itemData: {
     type: Object,
     default: () => ({}),
+    required: true,
   },
 });
 

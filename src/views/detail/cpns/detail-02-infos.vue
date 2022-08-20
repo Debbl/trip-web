@@ -1,5 +1,5 @@
 <script setup>
-const props = defineProps({
+defineProps({
   houseInfos: {
     type: Object,
     required: true,
@@ -15,6 +15,7 @@ const props = defineProps({
     <div class="tags">
       <template v-for="tag in houseInfos.houseTags">
         <span
+          :key="tag.title"
           class="item"
           v-if="tag.tagText"
           :style="{
