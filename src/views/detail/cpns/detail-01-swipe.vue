@@ -2,8 +2,10 @@
 import { toRefs } from "vue";
 
 const props = defineProps({
-  housePicture: Object,
-  default: () => ({}),
+  housePicture: {
+    type: Object,
+    default: () => ({}),
+  }
 });
 
 const housesGroup = {};

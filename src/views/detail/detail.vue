@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { getDetailInfos } from "@/services";
 import DetailSwipe from "./cpns/detail-01-swipe.vue";
+import DetailInfos from './cpns/detail-02-infos.vue'
 
 const router = useRouter();
 const route = useRoute();
@@ -31,6 +32,7 @@ const mainPart = computed(() => detailInfos.value.mainPart);
 
     <template v-if="mainPart">
       <detail-swipe :house-picture="mainPart.topModule.housePicture" />
+      <detail-infos :house-infos="mainPart.topModule" />
     </template>
     <!-- <van-tabs v-model:active="active" scrollspy sticky>
       <van-tab title="描述"> </van-tab>
