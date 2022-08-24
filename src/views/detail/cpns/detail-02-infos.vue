@@ -58,7 +58,6 @@ defineProps({
 <style lang="less" scoped>
 .infos {
   padding: 16px;
-
   .tags {
     margin: 6px 0;
 

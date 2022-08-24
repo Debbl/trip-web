@@ -10,7 +10,6 @@ const props = defineProps({
 
 const housesGroup = {};
 const { housePics } = toRefs(props.housePicture);
-console.log(housePics.value);
 for (const house of housePics.value) {
   const enumPictureCategory = house.enumPictureCategory;
   if (housesGroup[enumPictureCategory]) {
