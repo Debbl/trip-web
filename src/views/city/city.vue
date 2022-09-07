@@ -28,7 +28,7 @@ const { allCities } = storeToRefs(cityStore);
       placeholder="城市/区域/位置"
     />
     <van-tabs v-model:active="tabActive">
-      <template v-for="(value, key, index) in allCities">
+      <template v-for="value in allCities" :key="value.title">
         <van-tab :title="value.title">
           <city-content-item :group-cites-props="value" />
         </van-tab>
